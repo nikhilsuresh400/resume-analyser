@@ -3,6 +3,9 @@ import constants, { buildPresenceChecklist, METRIC_CONFIG } from '../constants.j
 import * as pdfjsLib from 'pdfjs-dist'
 import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min?url';
 import { FaRegFilePdf } from 'react-icons/fa';
+import { LuRefreshCcw, LuCheck } from 'react-icons/lu';
+import { PiTrophyDuotone } from 'react-icons/pi';
+import { GiLaurelsTrophy } from 'react-icons/gi';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
@@ -34,13 +37,13 @@ const App = () => {
     }).promise;
 
     const texts = await Promise.all(
-      Array.from({ length: pdf.numPages }, (_, i) => pdf.getPage(i + 1)).then(
+      Array.from({ length: pdf.numPages }, (_, i) => pdf.getPage(i + 1).then(
         (page) =>
           page
             .getTextContent()
             .then((tc) => tc.items.map((i) => i.str).join(""))
       )
-    );
+      ));
     return texts.join("\n").trim();       //JOINING EVERYTHING
   };
 
@@ -116,7 +119,7 @@ const App = () => {
 
   return (
     <div className='min-h-screen p-4 sm:p-6 lg:p-8 flex items-center justify-center'>
-      
+
       <div className='max-w-5xl mx-auto w-full'>
 
         <div className='text-center mb-6'>
@@ -132,7 +135,7 @@ const App = () => {
           <div className='upload-area group'>
             <div className='upload-zone'>
               <div className='place-items-center text-4xl sm:text-5xl lg:text-6xl mb-4'>
-                <FaRegFilePdf className='text-secondaryText-light/60 group-hover:text-theme-blue/70 transition-colors duration-500 ease-in-out'/>
+                <FaRegFilePdf className='text-secondaryText-light/60 group-hover:text-theme-blue/70 transition-colors duration-500 ease-in-out' />
               </div>
               <h3 className='text-xl mb-2 sm:text-2xl text-primaryText-light'>
                 Upload Your Resume
@@ -148,9 +151,9 @@ const App = () => {
                 id='file-upload'
               />
               <label htmlFor="file-upload"
-                className={`inline-block btn-primary ${ !aiReady ? "opacity-50 cursor-not-allowed" : ""}`}>
-                  Choose PDF File
-                </label>
+                className={`inline-block btn-primary ${!aiReady ? "opacity-50 cursor-not-allowed" : ""}`}>
+                Choose PDF File
+              </label>
             </div>
           </div>
         )}
@@ -162,7 +165,109 @@ const App = () => {
               <h3 className='text-lg sm:text-xl text-secondaryText-light mb-2'>
                 Analyzing Your Resume
               </h3>
-              <p className=''>Please wait while AI reviews your resume...</p>
+              <p className='text-secondaryText-light text-sm sm:text-base'>Please wait while AI reviews your resume...</p>
+            </div>
+          </div>
+        )}
+
+
+        {analysis && uploadFile && (
+          <div className='space-y-6 p-4 sm:px-8 lg:px-16'>
+            <div className='file-info-card'>
+              <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4'>
+                <div className='flex items-center gap-4'>
+                  <div className='icon-container-xl bg-linear-to-br from-surface-light border-divider-light'>
+                    <span className='text-3xl'><FaRegFilePdf className='text-secondaryText-light/60' /></span>
+                  </div>
+                  <div>
+                    <h3 className='text-xl font-semibold text-green-500 mb-1'>Analysis Complete</h3>
+                    <p className='text-secondaryText-light text-sm break-all'>
+                      {uploadFile.name}
+                    </p>
+                  </div>
+                </div>
+                <div className='flex gap-3'>
+                  <button onClick={reset}
+                    className='btn-secondary flex items-center gap-2'><LuRefreshCcw />New Analysis
+                  </button>
+                </div>
+              </div>
+            </div>
+
+
+            <div className='score-card'>
+              <div className='text-center mb-6'>
+                <div className='flex items-center justify-center gap-2 mb-3'>
+                  <span className='text-2xl'>🏆</span>
+                  <h2 className='text-2xl sm:text-2xl font-semibold text-primaryText-light'>Overall Score</h2>
+                </div>
+                <div className='relative'>
+                  <p className='text-6xl sm:text-8xl font-bold text-theme-blue drop-shadow-lg'>
+                    {analysis.overallScore || "7"}
+                  </p>
+                </div>
+                <div className={`inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-full ${parseInt(analysis.overallScore) >= 8
+                  ? "score-status-excellent"
+                  : parseInt(analysis.overallScore) >= 6
+                    ? "score-status-good"
+                    : "score-status-improvement"
+                  }`}>
+                  <span className='text-lg'>
+                    {parseInt(analysis.overallScore) >= 8
+                      ? "🌟"
+                      : parseInt(analysis.overallScore) >= 6
+                        ? "⭐"
+                        : "📈"}
+                  </span>
+                  <span className='font-semibold text-lg'>
+                    {parseInt(analysis.overallScore) >= 8
+                      ? "Excellent"
+                      : parseInt(analysis.overallScore) >= 6
+                        ? "Good"
+                        : "Needs Improvement"}
+                  </span>
+                </div>
+              </div>
+              <div className='progress-bar'>
+                <div className={`h-full rounded-full transition-all
+                  duration-1000 ease-out shadow-sm ${parseInt(analysis.overallScore) >= 8
+                    ? "progress-excellent"
+                    : parseInt(analysis.overallScore) >= 6
+                      ? "progress-good"
+                      : "progress-improvement"
+                  }`}
+                  style={{
+                    width: `${(parseInt(analysis.overallScore) / 10) * 100}%`
+                  }}
+                ></div>
+              </div>
+
+              <p className='text-secondaryText-light text-sm mt-3 text-center font-medium'>
+                Score based on content quality, formatting and keyword usage.
+              </p>
+            </div>
+
+
+            <div className='grid sm:grid-cols-2 gap-4'>
+              <div className='feature-card-green group'>
+                <div className='bg-green-500/20 icon-container-lg mx-auto mb-3
+                  group-hover:bg-green-400/70 transition-colors'>
+                  <span className='text-primaryText-dark text-2xl'><LuCheck /></span>
+                </div>
+                <h4
+                  className='text-green-400/70 text-sm font-semibold
+                    uppercase tracking-wide mb-3'>Top Strengths</h4>
+                    <div className='space-y-2 text-left'>
+
+                      {analysis.strengths.slice(0, 3).map((strength, index) => (
+                        <div key={index}
+                          className='list-item-green'>
+                            <span className='text-green-500 text-sm mt-0.5 font-extrabold'>·</span>
+                            <span className='text-green-400 font-medium text-sm leading-relaxed'>{ strength }</span>
+                          </div>
+                      ))}
+                    </div>
+              </div>
             </div>
           </div>
         )}

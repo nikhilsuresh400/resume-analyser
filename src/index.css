@@ -11,7 +11,7 @@
   --color-theme-blue: #008DD5;
   /* LIGHT MODE COLORS */
   --color-bg-light: #F5F5F5;
-  --color-surface-light: #DDDDDD;
+  --color-surface-light: #ebebeb;
   --color-primaryText-light: #161616;
   --color-secondaryText-light: #7d7d7d;
   --color-divider-light: #C4C4C4;
@@ -45,7 +45,7 @@
   }
 }
 
-/* Custom gradient classes for repeating patterns */
+/* CUSTOM GRADIENT CLASSES FOR RECURRING ELEMENTS */
 .bg-main-gradient {
   @apply bg-linear-to-br from-cyan-950 via-slate-950 to-sky-950;
 }
@@ -82,22 +82,26 @@
   @apply px-6 sm:px-8 py-3 sm:py-4 bg-primaryText-light text-primaryText-dark font-semibold rounded-lg cursor-pointer hover:opacity-92 transition text-base sm:text-lg;
 }
 
+.btn-download {
+  @apply px-6 sm:px-3 py-3 sm:py-1
+}
+
 .btn-secondary {
-  @apply px-4 py-2 bg-red-500/20 text-red-300 rounded-xl border border-red-500/30 hover:bg-red-500/30 transition text-lg cursor-pointer;
+  @apply px-4 py-2 bg-transparent rounded-xl border border-divider-light hover:border-theme-blue/70 hover:bg-theme-blue/30 transition text-sm cursor-pointer;
 }
 
 /* Score card styling */
 .score-card {
-  @apply bg-linear-to-br from-cyan-500/30 via-blue-600/20 to-sky-900/40 rounded-2xl p-6 sm:p-8 border border-sky-500/20 shadow-lg hover:shadow-xl transition-all duration-300;
+  @apply bg-bg-light rounded-xl p-6 sm:p-8 border border-divider-light shadow-md hover:shadow-lg transition-all duration-300;
 }
 
 /* Progress bar base */
 .progress-bar {
-  @apply w-full h-5 bg-slate-700/50 rounded-full overflow-hidden border border-slate-600/30;
+  @apply w-full h-5 bg-surface-light rounded-full overflow-hidden border border-slate-600/30;
 }
 
 .progress-bar-small {
-  @apply w-full h-4 bg-slate-700/50 rounded-full overflow-hidden border border-slate-600/30;
+  @apply w-full h-4 bg-surface-light rounded-full overflow-hidden border border-slate-600/30;
 }
 
 /* Icon container */
@@ -115,11 +119,11 @@
 
 /* Feature card gradients */
 .feature-card-green {
-  @apply relative bg-linear-to-br from-green-500/10 to-green-600/5 border border-green-500/30 p-6 rounded-2xl text-center transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/20 hover:border-green-400/50;
+  @apply relative bg-green-400/10 border border-green-500/30 p-6 rounded-xl text-center transition-all duration-300 hover:scale-102 hover:shadow-lg/70 hover:shadow-green-500/20 hover:border-green-400/50;
 }
 
 .feature-card-orange {
-  @apply relative bg-linear-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/30 p-6 rounded-2xl text-center transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/20 hover:border-orange-400/50;
+  @apply relative bg-orange-400/10 border border-orange-500/30 p-6 rounded-xl text-center transition-all duration-300 hover:scale-102 hover:shadow-lg/70 hover:shadow-orange-500/20 hover:border-orange-400/50;
 }
 
 /* Info box gradients */
@@ -163,12 +167,12 @@
 
 /* Loading spinner */
 .loading-spinner {
-  @apply animate-spin w-10 h-10 sm:w-12 sm:h-12 border-4 border-blue-400/30 border-t-sky-400 rounded-full mx-auto mb-4;
+  @apply animate-spin w-10 h-10 sm:w-12 sm:h-12 border-4 border-theme-blue border-t-sky-400 rounded-full mx-auto mb-4;
 }
 
 /* File info card */
 .file-info-card {
-  @apply bg-linear-to-r from-slate-800/80 to-slate-700/60 rounded-3xl p-6 border border-slate-600/50 backdrop-blur-sm;
+  @apply bg-bg-light shadow-lg rounded-3xl p-6 border border-divider-light backdrop-blur-sm;
 }
 
 /* Summary box */
@@ -178,26 +182,26 @@
 
 /* Score status styling */
 .score-status-excellent {
-  @apply bg-green-500/20 text-green-300 border border-green-500/30;
+  @apply bg-green-500/10 text-green-500 border border-green-500/30;
 }
 
 .score-status-good {
-  @apply bg-yellow-500/20 text-yellow-300 border border-yellow-500/30;
+  @apply bg-yellow-500/10 text-yellow-500 border border-yellow-500/50;
 }
 
 .score-status-improvement {
-  @apply bg-red-500/20 text-red-300 border border-red-500/30;
+  @apply bg-red-500/10 text-red-500 border border-red-500/50;
 }
 
 /* Progress bar colors */
 .progress-excellent {
-  @apply bg-linear-to-r from-green-400 to-emerald-400;
+  @apply bg-green-400;
 }
 
 .progress-good {
-  @apply bg-linear-to-r from-yellow-400 to-orange-400;
+  @apply bg-yellow-400;
 }
 
 .progress-improvement {
-  @apply bg-linear-to-r from-red-400 to-pink-400;
+  @apply bg-red-400;
 }
