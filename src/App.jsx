@@ -493,7 +493,9 @@ const App = () => {
         <p className="mt-1 opacity-60">
           Built for resume analysis and ATS optimization.
         </p>
-        <a href='' className='cursor-pointer hover:underline underline-offset-2 mt-4 flex items-center justify-center gap-1 group'>
+        <a href='https://github.com/nikhilsuresh400/resume-analyser'
+          target='_blank' rel='noopener noreferrer'
+          className='cursor-pointer hover:underline underline-offset-2 mt-4 flex items-center justify-center gap-1 group'>
           <span><LuGithub className='group-hover:text-theme-blue transition' /></span>View this tool's Github Repo
         </a>
       </footer>
