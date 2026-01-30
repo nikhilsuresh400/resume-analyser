@@ -61,11 +61,7 @@
 
 /* Section card with full styling */
 .section-card {
-  @apply bg-linear-to-br from-slate-800/60 to-slate-700/40 rounded-2xl p-6 border border-slate-600/50 transition-all duration-300;
-}
-
-.section-card:hover {
-  @apply border-slate-500/70 shadow-lg shadow-slate-500/10;
+  @apply bg-bg-light shadow-lg rounded-2xl p-6 border border-divider-light transition-all duration-300;
 }
 
 /* Upload area styling */
@@ -82,10 +78,6 @@
   @apply px-6 sm:px-8 py-3 sm:py-4 bg-primaryText-light text-primaryText-dark font-semibold rounded-lg cursor-pointer hover:opacity-92 transition text-base sm:text-lg;
 }
 
-.btn-download {
-  @apply px-6 sm:px-3 py-3 sm:py-1
-}
-
 .btn-secondary {
   @apply px-4 py-2 bg-transparent rounded-xl border border-divider-light hover:border-theme-blue/70 hover:bg-theme-blue/30 transition text-sm cursor-pointer;
 }
@@ -97,11 +89,11 @@
 
 /* Progress bar base */
 .progress-bar {
-  @apply w-full h-5 bg-surface-light rounded-full overflow-hidden border border-slate-600/30;
+  @apply w-full h-5 bg-surface-light rounded-full overflow-hidden border border-divider-light;
 }
 
 .progress-bar-small {
-  @apply w-full h-4 bg-surface-light rounded-full overflow-hidden border border-slate-600/30;
+  @apply w-full h-4 bg-surface-light rounded-full overflow-hidden border border-divider-light;
 }
 
 /* Icon container */
@@ -119,11 +111,11 @@
 
 /* Feature card gradients */
 .feature-card-green {
-  @apply relative bg-green-400/10 border border-green-500/30 p-6 rounded-xl text-center transition-all duration-300 hover:scale-102 hover:shadow-lg/70 hover:shadow-green-500/20 hover:border-green-400/50;
+  @apply relative hover:bg-green-100/20 border border-green-500/30 p-6 rounded-xl text-center transition-all duration-300 hover:scale-102 shadow-md hover:shadow-xl/70 hover:shadow-green-500/20 hover:border-green-400/50;
 }
 
 .feature-card-orange {
-  @apply relative bg-orange-400/10 border border-orange-500/30 p-6 rounded-xl text-center transition-all duration-300 hover:scale-102 hover:shadow-lg/70 hover:shadow-orange-500/20 hover:border-orange-400/50;
+  @apply relative hover:bg-orange-100/20 border border-orange-500/30 p-6 rounded-xl text-center transition-all duration-300 hover:scale-102 shadow-md hover:shadow-xl/70 hover:shadow-orange-500/20 hover:border-orange-400/50;
 }
 
 /* Info box gradients */
@@ -177,7 +169,7 @@
 
 /* Summary box */
 .summary-box {
-  @apply bg-slate-700/30 rounded-xl p-4 border border-slate-600/30;
+  @apply bg-[#f9f9f9] rounded-xl p-5 border border-divider-light;
 }
 
 /* Score status styling */

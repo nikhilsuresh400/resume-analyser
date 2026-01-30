@@ -6,6 +6,7 @@ import { FaRegFilePdf } from 'react-icons/fa';
 import { LuRefreshCcw, LuCheck } from 'react-icons/lu';
 import { PiTrophyDuotone } from 'react-icons/pi';
 import { GiLaurelsTrophy } from 'react-icons/gi';
+import { BsFillLightningChargeFill } from 'react-icons/bs';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
@@ -250,23 +251,102 @@ const App = () => {
 
             <div className='grid sm:grid-cols-2 gap-4'>
               <div className='feature-card-green group'>
-                <div className='bg-green-500/20 icon-container-lg mx-auto mb-3
-                  group-hover:bg-green-400/70 transition-colors'>
+                <div className='bg-green-400/70 icon-container-lg mx-auto mb-3 transition-colors'>
                   <span className='text-primaryText-dark text-2xl'><LuCheck /></span>
                 </div>
                 <h4
                   className='text-green-400/70 text-sm font-semibold
                     uppercase tracking-wide mb-3'>Top Strengths</h4>
-                    <div className='space-y-2 text-left'>
+                <div className='space-y-2 text-left'>
 
-                      {analysis.strengths.slice(0, 3).map((strength, index) => (
-                        <div key={index}
-                          className='list-item-green'>
-                            <span className='text-green-500 text-sm mt-0.5 font-extrabold'>·</span>
-                            <span className='text-green-400 font-medium text-sm leading-relaxed'>{ strength }</span>
-                          </div>
-                      ))}
+                  {analysis.strengths.slice(0, 3).map((strength, index) => (
+                    <div key={index}
+                      className='list-item-green'>
+                      <span className='text-green-500 text-sm mt-0.5 font-extrabold'>·</span>
+                      <span className='text-green-400 font-medium text-sm leading-relaxed'>
+                        {strength}
+                      </span>
                     </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* MAIN IMPROVEMENTS */}
+              <div className='feature-card-orange group'>
+                <div className='bg-orange-400/70 icon-container-lg mx-auto mb-3 transition-colors'>
+                  <span className='text-primaryText-dark text-2xl'>< BsFillLightningChargeFill /></span>
+                </div>
+                <h4
+                  className='text-orange-400/70 text-sm font-semibold
+                    uppercase tracking-wide mb-3'>Main Improvements</h4>
+                <div className='space-y-2 text-left'>
+
+                  {analysis.improvements.slice(0, 3).map((improvement, index) => (
+                    <div key={index}
+                      className='list-item-orange'>
+                      <span className='text-orange-500 text-sm mt-0.5 font-extrabold'>·</span>
+                      <span className='text-orange-400 font-medium text-sm leading-relaxed'>
+                        {improvement}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* SUMMARY */}
+            <div className='section-card group'>
+              <div className='flex items-center gap-3 mb-4'>
+                <div className='icon-container bg-[#333]'>
+                  <span className='text-purple-300 text-lg'>📝</span>
+                </div>
+                <h4 className='text-xl font-bold text-primaryText-light'>Executive Summary</h4>
+              </div>
+              <div className='summary-box'>
+                <p className='text-primaryText-light text-sm sm:text-base leading-relaxed'>
+                  {analysis.summary}
+                </p>
+              </div>
+            </div>
+
+            {/* PERFORMANCE METRICS */}
+            <div className='section-card group'>
+              <div className='flex items-center gap-3 mb-6'>
+                <div className='icon-container bg-theme-blue/20'>
+                  <span className='text-cyan-300 text-lg'>📊</span>
+                </div>
+                <h4 className='text-xl font-bold text-primaryText-light'>Performance Metrics</h4>
+              </div>
+
+
+              <div className='space-y-4'>
+                {METRIC_CONFIG.map((cfg, i) => {
+                  const value = analysis.performanceMetrics?.[cfg.key] ?? cfg.defaultValue;
+                  return <div key={i} className='group/item'>
+                    <div className='flex items-center justify-between mb-2'>
+                      <div className='flex items-center gap-2'>
+                        <span className='text-lg'>{cfg.icon}</span>
+                        <p className='text-primaryText-light font-normal'>{cfg.label}</p>
+                      </div>
+                      <span className='text-primaryText-light font-semibold'>{value}/10</span>
+                    </div>
+                    <div className='progress-bar-small'>
+                      <div className={`h-full bg-linear-to-r ${cfg.colorClass} rounded-full 
+                        transition-all duration-1000 ease-out group-hover/item:shadow-lg ${cfg.shadowClass}`}
+                        style={{ width: `${(value / 10) * 100}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                })}
+              </div>
+            </div>
+
+            <div className='section-card group'>
+              <div className='flex items-center gap-3 mb-6'>
+                <div className='icon-container bg-theme-blue/20'>
+                  <span className='text-lg text-purple-300'>🔍</span>
+                </div>
+                <h2 className='text-xl font-bold text-primaryText-light'>Resume Insights</h2>
               </div>
             </div>
           </div>
